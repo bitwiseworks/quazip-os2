@@ -7,6 +7,7 @@ include(cmake/clone-repo.cmake)
 
 set(QUAZIP_LIB_VERSION ${QuaZip_VERSION})
 set(QUAZIP_LIB_SOVERSION 1.4.0)
+set(QUAZIP_LIB_VERSION_PATCH 0)
 
 if(EMSCRIPTEN)
   #option(ZLIB_INCLUDE "Path to include dir" "")
