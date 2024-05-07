@@ -58,6 +58,7 @@ void TestQuaZipFile::zipUnzip_data()
             << "testdir2b/test2b.txt" << "testdir2b/subdir/test2bsub.txt")
         << QByteArray() << QByteArray() << Z_BZIP2ED << 9 << false << false << -1;
 #endif
+#ifndef Q_OS_OS2
     QTest::newRow("Cyrillic") << "cyrillic.zip" << (
             QStringList()
             << QString::fromUtf8("русское имя файла с пробелами.txt"))
@@ -69,6 +70,7 @@ void TestQuaZipFile::zipUnzip_data()
             << QString::fromUtf8("日本の寿司.txt")
             << QString::fromUtf8("ქართული ხაჭაპური.txt"))
         << QByteArray("") << QByteArray() << Z_DEFLATED << Z_DEFAULT_COMPRESSION << false << true << -1;
+#endif
     QTest::newRow("password") << "password.zip" << (
             QStringList() << "test.txt")
         << QByteArray() << QByteArray("PassPass") << Z_DEFLATED << Z_DEFAULT_COMPRESSION << false << false << -1;
@@ -414,7 +416,7 @@ void TestQuaZipFile::setFileName()
     QVERIFY(createTestArchive(testZipName, QStringList() << testFileName));
     QuaZipFile testFile(testZipName);
     testFile.setFileName(testFileName.toUpper());
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_OS2)
     QVERIFY(testFile.open(QIODevice::ReadOnly));
     testFile.close();
 #else

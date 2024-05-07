@@ -49,6 +49,7 @@ void TestQuaZip::getFileList_data()
     QTest::newRow("simple") << "qzfilelist.zip" << (
             QStringList() << "test0.txt" << "testdir1/test1.txt"
             << "testdir2/test2.txt" << "testdir2/subdir/test2sub.txt");
+#ifndef Q_OS_OS2
     QTest::newRow("russian") << QString::fromUtf8("файл.zip") << (
         QStringList() << QString::fromUtf8("test0.txt") << QString::fromUtf8("test1/test1.txt")
             << "testdir2/test2.txt" << "testdir2/subdir/test2sub.txt");
@@ -56,6 +57,7 @@ void TestQuaZip::getFileList_data()
         QStringList() << QString::fromUtf8("test.txt"));
     QTest::newRow("hebrew") << QString::fromUtf8("פתח תקווה.zip") << (
         QStringList() << QString::fromUtf8("test.txt"));
+#endif
 }
 
 void TestQuaZip::getFileList()
@@ -175,6 +177,7 @@ void TestQuaZip::setFileNameCodec_data()
 
 void TestQuaZip::setFileNameCodec()
 {
+#ifndef Q_OS_OS2
     QFETCH(QString, zipName);
     QFETCH(QStringList, fileNames);
     QFETCH(QByteArray, encoding);
@@ -206,6 +209,7 @@ void TestQuaZip::setFileNameCodec()
     // clean up
     removeTestFiles(fileNames);
     curDir.remove(zipName);
+#endif
 }
 
 void TestQuaZip::setOsCode_data()

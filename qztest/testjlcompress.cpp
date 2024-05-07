@@ -174,12 +174,14 @@ void TestJlCompress::extractFile_data()
             QStringList() << "test0.txt" << "testdir1/test1.txt"
             << "testdir2/test2.txt" << "testdir2/subdir/test2sub.txt")
         << "testdir2/test2.txt" << "test2.txt" << QByteArray();
+#ifndef Q_OS_OS2
     QTest::newRow("russian") << "jlextfilerus.zip" << (
             QStringList() << "test0.txt" << "testdir1/test1.txt"
             << QString::fromUtf8("testdir2/тест2.txt")
             << "testdir2/subdir/test2sub.txt")
         << QString::fromUtf8("testdir2/тест2.txt")
         << QString::fromUtf8("тест2.txt") << QByteArray("IBM866");
+#endif
     QTest::newRow("extract dir") << "jlextdir.zip" << (
             QStringList() << "testdir1/")
         << "testdir1/" << "testdir1/" << QByteArray();
@@ -324,6 +326,7 @@ void TestJlCompress::extractDir_data()
         << (QStringList() << "test0.txt")
         << "tmp/jlext/jldir/"
         << QByteArray();
+#ifndef Q_OS_OS2
     QTest::newRow("Cyrillic") << "cyrillic.zip"
         << (QStringList() << QString::fromUtf8("Ще не вмерла Україна"))
         << (QStringList() << QString::fromUtf8("Ще не вмерла Україна"))
@@ -334,6 +337,7 @@ void TestJlCompress::extractDir_data()
         << (QStringList() << QString::fromUtf8("日本"))
         << "tmp/jlext/jldir/"
         << QByteArray("UTF-8");
+#endif
 #ifdef QUAZIP_EXTRACT_TO_ROOT_TEST
     QTest::newRow("Exract to root") << "tmp/quazip-root-test.zip"
         << (QStringList() << "tmp/quazip-root-test/test.txt")
