@@ -773,7 +773,7 @@ QList<QuaZipFileInfo64> QuaZip::getFileInfoList64() const
 Qt::CaseSensitivity QuaZip::convertCaseSensitivity(QuaZip::CaseSensitivity cs)
 {
   if (cs == csDefault) {
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_OS2) 
       return Qt::CaseInsensitive;
 #else
       return Qt::CaseSensitive;
